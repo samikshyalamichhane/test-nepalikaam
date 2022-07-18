@@ -1,0 +1,162 @@
+/*------------------------------------
+Media Query For Other Devices
+------------------------------------*/
+@import "variables";
+
+// @media (max-width: 576px) {
+@media (max-width: 991px) {
+  /* added by Bishow Thapa */
+  .desktop_show, .custom-header-send-money {
+    display: none;
+  }
+
+  .main-menu-wrapper {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -100% !important;
+  }
+
+  .feedback__item {
+    &-Description {
+      &__image {
+        width: 35% !important;
+        margin: 0 auto;
+        // width: 100% !important;
+        &-img {
+          object-fit: cover;
+        }
+      }
+      &__meta {
+        width: 100% !important;
+        text-align: center;
+      }
+    }
+    
+  }
+
+  .custom-send-money {
+    display: block;
+    height: 45px;
+    width: 100%;
+    z-index: 1;
+    // position: fixed;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+
+  .navbar-toggler {
+    margin-top: 16px;
+  }
+
+  ul {
+    width: 100%;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  #banner .slider .slider__item__image__Description {
+    margin-bottom: 100px;
+  }
+
+  // #banner {
+  //   .slider {
+  //     .owl-nav {
+  //       .owl-next {
+  //         // font-size: 60px;
+  //         // right: 25%;
+  //         right: 20%;
+  //       }
+  //       .owl-prev {
+  //         // font-size: 60px;
+  //         // left: 25%;
+  //         left: 20%
+  //       }
+  //     }
+  //   }
+  // }
+
+  .trial_button ul li{
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  #footer {
+    padding: 4.4rem 0;
+  }
+}
+
+@media (min-width: 992px) {
+  /* added by Bishow Thapa */
+  .mobile_show, .send-money, .custom-send-money {
+    display: none;
+  }
+
+  .site-title {
+    &__title {
+      padding-bottom: 10px;
+    }
+  }
+  #nav {
+    .navbar {
+      .container {
+        align-items: flex-end;
+      }
+    }
+  }
+
+  #banner {
+    .slider__item {
+      &__image {
+        &__Description {
+          &-title {
+            //margin-bottom: 4rem;
+            margin-bottom: 1rem;
+            // font-size: 70px;
+            font-size: 3.2rem;
+            font-weight: 600;
+          }
+          &-para {
+            font-size: 16px;
+            max-width: 520px;
+            margin-left: auto;
+            text-align: justify;
+            margin-right: auto;
+          }
+        }
+      }
+    }
+    .slider {
+      .owl-nav {
+        .owl-next {
+          font-size: 60px;
+          // right: 25%;
+        }
+        .owl-prev {
+          font-size: 60px;
+          // left: 25%;
+        }
+      }
+    }
+  }
+
+  #mission {
+   padding:130px 0;
+  }
+  .feedback-slider {
+    .feedback__item {
+      &-Description {
+        display: flex;
+        padding: 30px 15px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+}

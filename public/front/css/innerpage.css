@@ -1,0 +1,671 @@
+.breadcrumbs {
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 1rem 0;
+  text-align: center;
+  background-position: center;
+}
+
+.breadcrumbs .breadcrumbs__list {
+  margin-bottom: 20px;
+}
+
+.breadcrumbs .breadcrumbs__list .breadcrumbs__list--item {
+  display: inline-block;
+  margin-right: 15px;
+  padding-right: 15px;
+  position: relative;
+}
+
+.breadcrumbs .breadcrumbs__list .breadcrumbs__list--item:not(:last-child)::after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  content: "\f054";
+  font-family: "FontAwesome";
+  display: inline-block;
+  color: white;
+}
+
+.breadcrumbs .breadcrumbs__list .breadcrumbs__list--item a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.breadcrumbs h2 {
+  font-size: 40px;
+  color: #fff !important;
+  text-transform: capitalize;
+}
+
+.overlay {
+  position: relative;
+}
+
+.overlay:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  background: #000;
+  content: "";
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.Innerpage {
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+}
+
+.m_b15 {
+  margin-bottom: 15px !important;
+}
+
+.m_t35 {
+  margin-top: 35px;
+}
+
+.inner-section-area .single-page-text h1 {
+  color: #d0923f;
+}
+
+.inner-section-area .single-page-text p span {
+  color: #d0923f;
+}
+
+.inner-section-area .about_page h3 {
+  font-size: 30px;
+  color: #d0923f;
+}
+
+.inner-section-area .sidebar-widget {
+  position: relative;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  border: 1px solid #d0923f2b;
+  background: #fff;
+}
+
+.inner-section-area .sidebar-widget h3 {
+  padding: 10px 15px;
+  color: #000;
+}
+
+.inner-section-area .sidebar-widget p {
+  font-size: 14px;
+  color: #377bb5;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+  line-height: 18px;
+}
+
+.inner-section-area .sidebar-widget h5 {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #d0923f;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content {
+  padding: 15px;
+  margin: 0 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: 1px solid rgba(55, 123, 181, 0.3);
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content .image-recent-post {
+  height: 90px !important;
+  width: 100px !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content .image-recent-post img {
+  height: 90px !important;
+  width: 100px !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content .date-title-recent-post {
+  width: 60%;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1;
+  font-weight: 400;
+  float: left;
+  margin-left: 2%;
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content .date-title-recent-post .recent-post-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content .date-title-recent-post .recent-post-title a {
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.inner-section-area .sidebar-widget .recent-post-widget .recent-posts-content .date-title-recent-post .recent-post-date {
+  display: block;
+  color: #090553;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.inner-section-area .single-page-text .writers {
+  color: #377bb5;
+}
+
+.inner-section-area .single-page-text .writers span {
+  padding-right: 20px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.inner-section-area .single-page-text .about_image img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/*------------------------------------
+blogInner.php css starts
+------------------------------------*/
+.inner-section-area .single-page-text .writers span {
+  padding-right: 20px;
+  font-size: 14px;
+}
+
+.inner-section-area .single-page-text .about_image img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/*------------------------------------
+  blogInner.php css ends
+  ------------------------------------*/
+/*------------------------------------
+  blog.php css starts
+  ------------------------------------*/
+.author {
+  font-style: italic;
+  color: #FFFFFF;
+  font-size: 0.889rem;
+}
+
+.author__name {
+  font-weight: bold;
+}
+
+.blog-section .blog-body {
+  margin: 10px 0;
+}
+
+.blog-section .blog-body .blog-img {
+  overflow: hidden;
+  max-width: 453px;
+  height: 310px;
+  background: #000;
+  margin-bottom: 1rem;
+}
+
+.blog-section .blog-body .blog-img:hover img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.blog-section .blog-body .blog-img img {
+  width: 100%;
+  height: 310px;
+  border-radius: 0.3em 0.3em 0 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.blog-section .blog-body .artical-info .post-head-left h4 a {
+  color: #d0923f !important;
+}
+
+.blog-section .blog-body .artical-info .post-head-left .author a {
+  color: #d0923f !important;
+}
+
+.blog-section .blog-body .artical-info .artbtn {
+  color: #d0923f;
+}
+
+/*------------------------------------
+notice.php css starts
+------------------------------------*/
+.primaryHeading {
+  color: #d0923f;
+  line-height: 2;
+}
+
+#noticeContainer .primaryHeading {
+  line-height: 2;
+}
+
+#noticeContainer {
+  margin: 20px 0;
+}
+
+.leftImage__RightContent {
+  border-top: 1px solid rgba(208, 146, 63, 0.3);
+  padding: 20px 0;
+}
+
+.leftImage__RightContent .RIghtContent h3 {
+  font-size: 1rem;
+}
+
+.leftImage {
+  overflow: hidden;
+  max-width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid #d0923f;
+}
+
+.leftImage:hover img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.leftImage img {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.latestNewsList {
+  border: 1px solid rgba(208, 146, 63, 0.3);
+  padding: 0 20px;
+}
+
+.latestNews__News {
+  border-top: 1px solid rgba(208, 146, 63, 0.3);
+  padding: 20px 0;
+}
+
+.secondaryButtonComponent {
+  background: #f1f1f1;
+  color: #d0923f;
+  border: 1px solid rgba(208, 146, 63, 0.3);
+}
+
+/*------------------------------------
+  notice.php css ends
+  ------------------------------------*/
+/*------------------------------------
+  noticeInner.php css starts
+  ------------------------------------*/
+#noticeInner {
+  margin: 1.4rem 0;
+}
+
+#noticeInner .primaryHeading {
+  line-height: 2;
+}
+
+#noticeInner .sidebarListComponent a {
+  color: #377bb5;
+}
+
+/*------------------------------------
+  noticeInner.php css ends
+  ------------------------------------*/
+/*------------------------------------
+  blog.php css ends
+  ------------------------------------*/
+/*------------------------------------
+  pagination
+  ------------------------------------*/
+.pagination .page-link {
+  color: #7c4807;
+}
+
+.pagination .active .page-link {
+  background: #7c4807;
+}
+
+/*------------------------------------
+gallery.php css starts
+------------------------------------*/
+.gallery__list-image img {
+  width: 100%;
+}
+
+.gallery__list-title h2 {
+  background: #7c4807;
+  color: #fff;
+  font-size: 20px;
+  padding: 0.5rem 2.5rem;
+  border-radius: 30px;
+  display: inline-block;
+  -webkit-transform: translateY(-40%);
+          transform: translateY(-40%);
+}
+
+/*------------------------------------
+  gallery.php css ends
+  ------------------------------------*/
+/*------------------------------------
+  galleryInner.php css starts
+  ------------------------------------*/
+.gallery-inner-page .gallery-images .gallery-view img {
+  height: 250px !important;
+  position: relative;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+.gallery-inner-page .gallery-images .gallery-overlay {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  margin: 5px;
+}
+
+.gallery-inner-page .gallery-images .gallery-overlay .gallery-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  opacity: 0;
+}
+
+.gallery-inner-page .gallery-images .gallery-overlay .gallery-effect:hover {
+  opacity: 1;
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+
+.gallery-inner-page .gallery-images .gallery-overlay .gallery-flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.gallery-inner-page .gallery-images .gallery-overlay .gallery-flex-center i {
+  font-size: 1rem;
+  color: white;
+}
+
+.gallery-inner-page .gallery-images .gallery-overlay .gallery-rgba {
+  background-color: rgba(33, 150, 243, 0.56);
+}
+
+/*------------------------------------
+  galleryInner.php css ends
+  ------------------------------------*/
+/*------------------------------------
+contact.php css starts
+------------------------------------*/
+#contact-us .contact_button .submitButtonContent {
+  display: inline-block;
+  background: #d0923f;
+  color: #fff !important;
+  padding: 9px 40px;
+  border: 1px solid #d0923f;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+#contact-us .contact_button .submitButtonContent:hover {
+  background: none !important;
+  color: #d0923f !important;
+}
+
+#contact-us .contact ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.7rem 0.2rem;
+}
+
+#contact-us .contact .listIconCircle i {
+  width: 30px;
+  height: 30px;
+  background: #d0923f;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-right: 1rem;
+}
+
+#contact-us .single-contact a {
+  color: #377bb5;
+}
+
+#map {
+  height: 350px;
+}
+
+#map .googleMap {
+  height: 350px;
+  border: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.testimonial-page-section .job_testimonial .testimonial_text {
+  position: relative;
+  padding: 35px 25px 64px 25px;
+  margin-top: 50px;
+  border-style: solid;
+  border-color: #d0923f;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 30px;
+}
+
+.testimonial-page-section .job_testimonial .testimonial_text h3 {
+  color: #377bb5;
+}
+
+.testimonial-page-section .job_testimonial .testimonial_text .testimonial_image {
+  position: absolute;
+  z-index: 1;
+  left: 15px;
+  top: -65px;
+}
+
+.testimonial-page-section .job_testimonial .testimonial_text .testimonial_image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #d0923f;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/*------------------------------------
+  testimonial.php css ends
+  ------------------------------------*/
+/*------------------------------------
+  about.php css starts
+  ------------------------------------*/
+/*------------------------------------
+  about.php css ends
+  ------------------------------------*/
+/*------------------------------------
+serviceList.php css starts
+------------------------------------*/
+.mb_30 {
+  margin-bottom: 30px;
+}
+
+.innerpage__heading__title {
+  font-size: 28px;
+  font-weight: 600;
+  text-transform: capitalize;
+  line-height: 1.4;
+}
+
+.innerpage__heading__para {
+  font-size: 14px;
+  max-width: 520px;
+}
+
+#innerPage__section {
+  background: #7c48070a;
+  padding: 40px 0;
+}
+
+#innerPage__section .serviceList {
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  border-radius: 5px;
+  background: #fff;
+  height: 100%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  position: relative;
+}
+
+#innerPage__section .serviceList::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #7c4807;
+  opacity: 0;
+  visibility: hidden;
+  left: 0;
+  bottom: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#innerPage__section .serviceList:hover {
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+  -webkit-box-shadow: 0 2px 48px 0 rgba(124, 72, 7, 0.1);
+          box-shadow: 0 2px 48px 0 rgba(124, 72, 7, 0.1);
+}
+
+#innerPage__section .serviceList:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+#innerPage__section .serviceList__icon-i {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  background: #7c4807;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+}
+
+#innerPage__section .serviceList__title {
+  font-size: 18px;
+  margin-top: 25px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#innerPage__section .serviceList__para {
+  font-size: 14px;
+  color: #666;
+}
+
+#innerPage__section .serviceList__link-link {
+  color: #7c4807;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/*------------------------------------
+serviceList.php css starts
+------------------------------------*/
+/*------------------------------------
+servicesInner.php css starts
+------------------------------------*/
+/*------------------------------------
+servicesInner.php css ends
+------------------------------------*/
+/*------------------------------------
+InnerPage Responsive css starts
+------------------------------------*/
+@media (min-width: 768px) {
+  /*------------------------------------
+innerpage.php css starts
+------------------------------------*/
+  .breadcrumbs {
+    padding: 5rem 0;
+  }
+  .inner-section-area {
+    padding: 1.4rem 0;
+  }
+  /*------------------------------------
+  innerpage.php css ends
+  ------------------------------------*/
+}
+
+@media (max-width: 576px) {
+  .tripName {
+    font-size: 1.4rem;
+    padding-top: 2rem;
+  }
+}
+
+/*------------------------------------
+InnerPage Responsive css ends
+------------------------------------*/
+/*# sourceMappingURL=innerpage.css.map */
