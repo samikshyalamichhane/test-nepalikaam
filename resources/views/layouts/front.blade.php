@@ -53,10 +53,12 @@
         <section class="bg-strip px-lg-5">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="offset-md-3 col-3">
+                    <!--<div class="offset-md-3 col-3">-->
+                         <div class="col-3">
                         <p>Welcome to Nepali Kaam!</p>
                     </div>
-                    <div class="col-6">
+                    <!--<div class="col-6">-->
+                    <div class="col-9">
                         <div class="social-box text-right">
                             <p>Follow Us</p>
                             <ul>

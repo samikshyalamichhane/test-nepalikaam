@@ -91,6 +91,9 @@ Route::group(['namespace' => 'Front'], function () {
     Route::group(['prefix' => 'client', 'middleware' => ['auth', 'client']], function () {
         Route::get('dashboard', 'DefaultController@clientDashboard')->name('clientDashboard');
         Route::get('make-transaction', 'DefaultController@makeTransaction')->name('makeTransaction');
+        Route::post('make-transaction-step1', 'TransactionController@makeTransactionStepOne')->name('makeTransactionOne');
+        Route::post('make-transaction-step2', 'TransactionController@makeTransactionStepTwo')->name('makeTransactionTwo');
+        Route::post('make-transaction-step3', 'TransactionController@makeTransactionStepThree')->name('makeTransactionThree');
         Route::get('all-transaction', 'DefaultController@allTransaction')->name('allTransaction');
         Route::get('view-profile/{id}', 'DefaultController@viewProfile')->name('viewProfile');
         Route::post('save-transaction', 'DefaultController@saveTransaction')->name('saveTransaction');

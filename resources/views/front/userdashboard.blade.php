@@ -5,7 +5,9 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
    <title>User Dashboard</title>
+   <link rel="shortcut icon" type="image/icon" href="{{asset('front/img/logo.png')}}">
    <link rel="stylesheet" href="{{asset('front/css/import.css')}}">
    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
    <link rel="stylesheet" href="{{asset('front/css/owl.carousel.min.css')}}">

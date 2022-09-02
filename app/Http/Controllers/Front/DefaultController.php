@@ -156,11 +156,12 @@ class DefaultController extends Controller
     }
     public function clientDashboard()
     {
-        $transactions = Auth::user()->transactions()->orderBy('updated_at', 'DESC')->get();
+        $transactions = Auth::user()->transactions()->orderBy('updated_at', 'DESC')->paginate(6);
         $detail = $this->dashboard->first();
+        $receivers = Auth::user()->receivers()->orderBy('updated_at', 'DESC')->paginate(6);
         $CurrentMonthTransaction = Auth::user()->transactions()->whereMonth('created_at', Carbon::now()->month)
             ->get();
-        return view('front.clientDashboard', compact('transactions','detail','CurrentMonthTransaction'));
+        return view('front.clientDashboard', compact('transactions','detail','CurrentMonthTransaction','receivers'));
     }
 
     public function allTransaction()
@@ -669,8 +670,9 @@ class DefaultController extends Controller
 
     public function getAllRates()
     {
-        $rates = Rate::orderBy('updated_at', 'DESC')->take(5)->get();
-        return response([
+        $rates = Rate::orderBy('updated_at', 'DESC')->whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->distinct()->get();
+        // dd($rates);
+                return response([
             'success' => true,
             'data' => $rates,
         ]);

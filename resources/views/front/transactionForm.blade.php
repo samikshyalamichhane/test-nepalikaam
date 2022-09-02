@@ -233,56 +233,33 @@
                     <div id="validation-errors" class="display__message">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"> </div>
                     
-                        <form id="upload-image-form" action="{{route('saveTransaction')}}" method="post" enctype="multipart/form-data" novalidate>
+                         <form id="transaction-form" action="{{route('saveTransaction')}}" method="post" enctype="multipart/form-data" >
                             @csrf
                             <!-- progressbar -->
                             <ul id="progressbar">
-                                <li class="active" id="account">Account</li>
-                                <li id="personal">Receiver</li>
+                                <li class="active" id="account">Receiver</li>
+                                <li id="personal">Account</li>
                                 <li id="payment">Paid Slip</li>
-                                <li id="confirm">Payment</li>
+                                <!-- <li id="confirm">Payment</li> -->
                             </ul>
                             <!-- fieldsets -->
-                            <fieldset>
-                                <div class="form-card">
-                                   <div class="">
-					<span>AUD</span>
-				  </div>
-                                    <input  class="test remit_amount" type="number" name="remit_amount"  step="any"
-                                                    onkeyup="checkRemitAmount()" placeholder="How much AUD you want to send?" required/>
-                                    <p>Service Charge:${{ $dashboard_composer->service_charge }}</p>
-                                    <div class="">
-					<span>So total paying out </span>
-				  </div>
-                                    <!-- <input type="text" name="uname" placeholder="$110"/> -->
-                                    <input type="number" class="form-control sending_amount pull-right" readonly required />
-                                    <p>Today's rate:Rs.{{ $composer__rate->rate }}</p>
-                                     <div class="">
-					<span>Receiver will receive</span>
-				  </div>
-                                    <input type="text" class="npr" name="npr" readonly required/>
-                                    
-                                </div>
-                                <hr>
-                                <input type="button" name="next" class="next action-button" value="Next"/>
-                            </fieldset>
-                            <fieldset>
-                                <div class="form-card receiver commonp">
-                                    <p>Fill detail of the receiver:</p>
-                                    <div class="row mb-4" v-if="getPerson.length > 0">
-                                        <div class="col-md-3">
-                                            <label>Old Receivers:</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                        <select @change="findAccountHolder($event)" v-model="saved_person"
-                                                    class="form-control">
-                                                    <option disabled selected>Please select name</option>
-                                                    <option v-for="(number) in getPerson" :value="number">
-                                                        @{{number}}
-                                                    </option>
-                                                </select>
-                                        </div>
-                                        </div>
+                            <fieldset id="account_information" class="acc">
+                            <div class="form-card receiver commonp">
+                                    <p>Receiver Detail:</p>
+                                    <!--<div class="row mb-4" v-if="getPerson.length > 0">-->
+                                    <!--    <div class="col-md-3">-->
+                                    <!--        <label>Old Receivers:</label>-->
+                                    <!--    </div>-->
+                                    <!--    <div class="col-md-9">-->
+                                    <!--    <select @change="findAccountHolder($event)" v-model="saved_person"-->
+                                    <!--                class="form-control">-->
+                                    <!--                <option disabled selected>Please select name</option>-->
+                                    <!--                <option v-for="(number) in getPerson" :value="number">-->
+                                    <!--                    @{{number}}-->
+                                    <!--                </option>-->
+                                    <!--            </select>-->
+                                    <!--    </div>-->
+                                    <!--    </div>-->
                                         <div class="row">
                                         <div class="col-md-3 pt">
                                             <label>Payment Type:</label>
@@ -298,6 +275,39 @@
                                                 <option value="E-sewa">E-sewa</option>
 
             <select>
+                
+                 <div id="bank-amount" style="color:red"></div>
+                <div id="remit-amount" style="color:red"></div>
+                <div id="esewa-amount" style="color:red"></div>
+                
+                <div class="row mb-4 old-rec" v-if="getPerson.length > 0">
+                                        <div class="olr">
+                                            <label>Old Receivers:</label>
+                                        </div>
+                                        <div class="olf">
+                                        <select @change="findAccountHolder($event)" v-model="saved_person"
+                                                    class="form-control">
+                                                    <option disabled selected>Please select name</option>
+                                                    <option v-for="(number) in getPerson" :value="number">
+                                                        @{{number}}
+                                                    </option>
+                                                </select>
+                                        </div>
+                                        </div>
+                <!--<div class="row mb-4 old-rec" v-if="getPerson.length > 0">-->
+                <!--                        <div class="col-md-3">-->
+                <!--                            <label>Old Receivers:</label>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-md-9">-->
+                <!--                        <select @change="findAccountHolder($event)" v-model="saved_person"-->
+                <!--                                    class="form-control">-->
+                <!--                                    <option disabled selected>Please select name</option>-->
+                <!--                                    <option v-for="(number) in getPerson" :value="number">-->
+                <!--                                        @{{number}}-->
+                <!--                                    </option>-->
+                <!--                                </select>-->
+                <!--                        </div>-->
+                <!--                        </div>-->
                 <div id="Bank-Deposit" class="inv">
                     <div class="login-form">
                         <div class="newform">
@@ -308,56 +318,69 @@
                                     <label for="full_name" class="col-md-3 col-form-label">Contact Number:</label>
                                     <div class="col-md-9">
                                         <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
-                                        <input name="contact_number" class="form-control contact_number"
+                                        <input name="contact_number" class="form-control contact_number"  id="full_name"
                                                     type="number" :value="account_holder && account_holder.contact_number"
-                                                    :readonly="getDisabled" pattern="/^-?\d+\.?\d*$/"
+                                                    :readonly="getDisabled" 
                                                     onKeyPress="if(this.value.length==10) return false">
+                                                    @error('contact_number')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
-                                 <div class="form-group row">
+                                 <!-- <div class="form-group row">
                                     <label for="email_address" class="col-md-3 col-form-label">Full Name:</label>
                                     <div class="col-md-9">
-                                        <!-- <input type="text" id="email_address" class="form-control so" name="email-address" placeholder="Write Here"> -->
                                         <input :value="account_holder && account_holder.full_name" type="text"
                                                     :readonly="getDisabled" name="full_name" class="form-control full_name"
                                                     required />
+                                                    @error('full_name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label for="user_name" class="col-md-3 col-form-label">Acc Holder Name:</label>
                                     <div class="col-md-9">
-                                        <!-- <input type="text" id="user_name" class="form-control so" name="username" placeholder="Write Here"> -->
                                         <input type="text" name="account_holder_name"
                                                     :value="account_holder && account_holder.account_holder_name"
                                                     class="form-control account_holder_name" :readonly="getDisabled"
                                                     required />
+                                                    @error('account_holder_name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="phone_number" class="col-md-3 col-form-label">Bank Name:</label>
                                     <div class="col-md-9">
-                                        <!-- <input type="text" id="phone_number" class="form-control so" placeholder="Write Here"> -->
                                         <input type="text" name="bank_name"
                                                     :value="account_holder && account_holder.bank_name"
                                                     class="form-control bank_name" :readonly="getDisabled" required="" />
-                                    </div>
+                                                    @error('bank_name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="present_address" class="col-md-3 col-form-label">Bank Branch:</label>
                                     <div class="col-md-9">
-                                        <!-- <input type="text" id="present_address" class="form-control so" placeholder="Write Here"> -->
                                         <input :value="account_holder && account_holder.bank_branch" type="text"
                                                     name="bank_branch" :readonly="getDisabled"
-                                                    class="form-control bank_branch" />
+                                                    class="form-control bank_branch" required />
+                                                    @error('bank_branch')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-3 col-form-label">Account Number:</label>
                                     <div class="col-md-9">
-                                        <!-- <input type="text" id="permanent_address" class="form-control so" name="permanent-address" placeholder="Write Here"> -->
                                         <input :value="account_holder && account_holder.account_number" type="text"
                                                     name="account_number" :readonly="getDisabled"
-                                                    class="form-control account_number" />
+                                                    class="form-control account_number" required />
+                                                    @error('account_number')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                         </div>
@@ -380,7 +403,7 @@
                                         </div> -->
                 
                 <div id="E-sewa" class="inv"><div class="newform commonp">
-                   <p>Upload Payment slip or proof.</p>
+                   <!-- <p>Upload Payment slip or proof.</p>
                    <h5>New Receiver:-</h5>
                    <div class="row mb-4" v-if="getPerson.length > 0">
                                         <div class="col-md-3">
@@ -395,18 +418,20 @@
                                                     </option>
                                                 </select>
                                         </div>
-                                        </div>
+                                        </div> -->
                          <h5>New Receiver:-<a @click="clearSelection"
                                                     class="text-light mt-2 btn btn-sm btn-success">Reset
                                                     </a></h5>
                          <div class="form-group row">
-                                    <label for="full_name" class="col-md-3 col-form-label">Esewa Id:</label>
+                                    <label for="full_name" class="col-md-3 col-form-label">Esewa Id(Number):</label>
                                     <div class="col-md-9">
                                         <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
                                         <input type="number" name="esewa_number"
                                                     class="form-control" required type="number"
-                                                    pattern="/^-?\d+\.?\d*$/"
                                                     onKeyPress="if(this.value.length==10) return false">
+                                                    @error('esewa_number')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                  <div class="form-group row">
@@ -415,6 +440,9 @@
                                         <!-- <input type="text" id="email_address" class="form-control so" name="email-address" placeholder="Write Here"> -->
                                         <input type="text" name="esewa_name"
                                                     class="form-control" required type="text">
+                                                    @error('esewa_name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                
@@ -432,8 +460,10 @@
                                                     class="form-control receiver_contact_number" required type="number"
                                                     :readonly="getDisabled"
                                                     :value="account_holder && account_holder.receiver_contact_number"
-                                                    pattern="/^-?\d+\.?\d*$/"
                                                     onKeyPress="if(this.value.length==10) return false">
+                                                    @error('receiver_contact_number')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                  <div class="form-group row">
@@ -443,6 +473,9 @@
                                         <input :value="account_holder && account_holder.full_name" type="text"
                                                     :readonly="getDisabled" name="full_name" class="form-control full_name"
                                                     required />
+                                                    @error('account_holder.full_name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -452,6 +485,9 @@
                                         <input type="text" name="pick_up_district"
                                                     class="form-control pick_up_district" :readonly="getDisabled"
                                                     :value="account_holder && account_holder.pick_up_district" />
+                                                    @error('pick_up_district')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                     </div>
                                 </div>
                                 
@@ -474,11 +510,47 @@
         </div>
                                         </div>
                                 </div>
-                                <input type="button" name="next" class="next action-button" value="Submit"/>
+                                <input type="button" name="next" class="next action-button" value="Next"/>
                             </fieldset>
-                            <fieldset>
+                                <fieldset id="company_information" class="rec">
+                                <div class="form-card">
+                                   <div class="">
+					<span>AUD</span>
+				  </div>
+                                    <input  class="test remit_amount" type="number" name="remit_amount"  step="any"
+                                                    onkeyup="checkRemitAmount()" placeholder="How much AUD you want to send?" id="remit_amount" required/>
+                                                    @error('remit_amount')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                    <p>Service Charge:${{ $dashboard_composer->service_charge }}</p>
+                                    <div class="">
+					<span>So total paying out </span>
+				  </div>
+                                    <!-- <input type="text" name="uname" placeholder="$110"/> -->
+                                    <input type="number" class="form-control sending_amount pull-right" readonly required />
+                                    
+                                    <p id="rate-for-today">Today's rate:Rs.{{ $composer__rate->rate }}</p>
+                                     <div class="">
+					<span>Receiver will receive</span>
+				  </div>
+                                    <input type="text" id="npr" class="npr" name="npr" readonly required/>
+                                    @error('npr')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                    
+                                </div>
+                                <!-- <input type="button" name="next" class="next action-button" value="Next"/> -->
+
+                               
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="button" name="next" class="next action-button" value="Next"/>
+                            <!-- </fieldset> -->
+                            <!-- <fieldset id="company_information" class="rec"> -->
+                               
+                            </fieldset>
+                            <fieldset id="personal_information" class="pa">
                                 <div class="form-card newupload">
-                                    <p>Upload your payment slip/Transfered slip/eposited Voucher<br> Or any proof of payemnt</p>
+                                    <p>Upload your payment receipt</p>
                                     <div id="input-images-2" style="padding-top: .5rem;"></div>
                                     
                                 </div>
@@ -486,18 +558,26 @@
                                <!--            <input id="inputFile" class="file-upload form-control" type="file" accept="image/*" />-->
                                           
                                <!--        </div>-->
-                               <!-- <input id="fileUpload" type="file" name="transfer_receipt[]"  multiple> -->
+                               <div class="drag-area">
+   
+      
+    <h6>Drag & Drop files here or click to browse</h6>
+    <input id="fileUpload" type="file" name="transfer_receipt[]"  multiple>
+  <!--<input id="fileUpload" type="file" name="transfer_receipt[]"  multiple>-->
+  <!--  <input type="file" hidden>-->
+  </div>
+                               
                                <div class="col-12">
                                             <div id="image-holder" class="d-lg-flex"></div>
                                         </div>
                               <!-- <div class="uploadfiles">
                                 <label class="btn-btn-default">
                                     <div class="fa fa-upload fa-2x "></div>
-                                    <input id="inputFile" class="file-upload" type="file" accept="image/*" />
+                                    <input id="image-holder" class="file-upload" type="file" accept="image/*" />
                                 </label>
                                 </div> -->
-                                <!--<input type="button" name="previous" class="previous action-button-previous" value="Previous"/>-->
-                                <button type="submit" class="btn btn-success">Upload</button>
+                               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <button type="submit" class="btn btn-success submitButton">Submit</button>
                                 <!-- <input type="button" name="make_payment" class="next saveReceiver action-button " value="Submit"/> -->
                             </fieldset>
                             <!-- <fieldset>
@@ -552,6 +632,7 @@
 @push('scripts')
 
 <script src="{{asset('backend/dist/js/sweetalert.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 @if(session('message'))
 
@@ -579,8 +660,8 @@ Swal.fire({
 
     function checkRemitAmount(e) {
         const SELECTED_TYPE = $('.selected__type').val();
+        console.log(SELECTED_TYPE)
         const REMIT_AMOUNT = $('.remit_amount').val()
-        console.log(REMIT_AMOUNT)
         $('.remit_bind').val(REMIT_AMOUNT)
         $('.sending_amount').val('');
        
@@ -597,19 +678,19 @@ Swal.fire({
        
 
         const SENDING_AMOUNT = REMIT_AMOUNT - SERVICE_CHARGE
-        console.log(SENDING_AMOUNT)
         $('.sending_amount').val(SENDING_AMOUNT)
         const offer_price = "{{$composer__rate->offer_price}}";
         if(offer_price>0){
-            if(SENDING_AMOUNT>= offer_price){
+          if(SENDING_AMOUNT>= offer_price){
                 rate = {{$composer__rate->offer_rate}};
+                document.getElementById("rate-for-today").innerHTML = `Today's Rate Rs. <del>{{ $composer__rate->rate }}</del> ${rate}`;
             }else{
                 rate = {{ $composer__rate->rate }}
-            }    
+                document.getElementById("rate-for-today").innerHTML = `Today's Rate Rs. ${rate}`;
+            }   
         }
          $('#rate_amount').text(rate);
         const NPR = SENDING_AMOUNT * rate
-        console.log(NPR)
 
         if(NPR < 0) {
             $('.remit_bind').val(REMIT_AMOUNT)
@@ -617,45 +698,44 @@ Swal.fire({
             return
         }
         $("input[name='npr']").val(NPR.toFixed(2));
-         // if(SELECTED_TYPE == '') {
-        //   return;
-        // }
+         if(SELECTED_TYPE == '') {
+          return;
+        }
+        if(SELECTED_TYPE == 'Bank-Deposit') {
+            if(REMIT_AMOUNT > MAX_DEPOSIT_AMOUNT) {
+               $('.remit_amount').val('')
+               $("input[name='npr']").val('')
+               $('.remit_bind').val(REMIT_AMOUNT)
+               $('.sending_amount').val('')
 
-        // if(SELECTED_TYPE == 'Bank-Deposit') {
-        //     if(REMIT_AMOUNT > MAX_DEPOSIT_AMOUNT) {
-        //        $('.remit_amount').val('')
-        //        $("input[name='npr']").val('')
-        //        $('.remit_bind').val(REMIT_AMOUNT)
-        //        $('.sending_amount').val('')
+               alert(`Maximum sending limit amount is $ ${MAX_DEPOSIT_AMOUNT}`)
+               return;
+           }
+        }
 
-        //        alert(`Maximum sending limit amount is $ ${MAX_DEPOSIT_AMOUNT}`)
-        //        return;
-        //    }
-        // }
+        if(SELECTED_TYPE == 'E-sewa') {
+            if(REMIT_AMOUNT > MAX_ESEWA_AMOUNT) {
+               $('.remit_amount').val('')
+               $("input[name='npr']").val('')
+               $('.remit_bind').val(REMIT_AMOUNT)
+               $('.sending_amount').val('')
 
-        // if(SELECTED_TYPE == 'E-sewa') {
-        //     if(REMIT_AMOUNT > MAX_ESEWA_AMOUNT) {
-        //        $('.remit_amount').val('')
-        //        $("input[name='npr']").val('')
-        //        $('.remit_bind').val(REMIT_AMOUNT)
-        //        $('.sending_amount').val('')
+               alert(`Maximum sending limit amount is $ ${MAX_ESEWA_AMOUNT}`)
+               return;
+           }
+        }
 
-        //        alert(`Maximum sending limit amount is $ ${MAX_ESEWA_AMOUNT}`)
-        //        return;
-        //    }
-        // }
+        if(SELECTED_TYPE == 'Remit') {
+            if(REMIT_AMOUNT > MAX_REMIT_AMOUNT) {
+               $('.remit_amount').val('')
+               $("input[name='npr']").val('')
+               $('.remit_bind').val(REMIT_AMOUNT)
+               $('.sending_amount').val('')
 
-        // if(SELECTED_TYPE == 'Remit') {
-        //     if(REMIT_AMOUNT > MAX_REMIT_AMOUNT) {
-        //        $('.remit_amount').val('')
-        //        $("input[name='npr']").val('')
-        //        $('.remit_bind').val(REMIT_AMOUNT)
-        //        $('.sending_amount').val('')
-
-        //        alert(`Maximum sending limit amount is $ ${MAX_REMIT_AMOUNT}`)
-        //        return;
-        //     }
-        // }
+               alert(`Maximum sending limit amount is $ ${MAX_REMIT_AMOUNT}`)
+               return;
+            }
+        }
     }
     $(document).ready(function(){
       $(".form-row").on("submit", function() {
@@ -670,6 +750,20 @@ Swal.fire({
 <script src="/backend/dist/js/image-uploader.min.js"></script>
 <!-- production version, optimized for size and speed -->
 {{-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --}}
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+   <script>
+    $(document).ready(function () {
+    $('#transaction-form').validate({ // initialize the plugin
+        rules: {
+            remit_amount: {
+                required: true
+            }
+        }
+    });
+});
+</script>
 
 <script>
     var app = new Vue({
@@ -820,83 +914,173 @@ Swal.fire({
     });
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
+//   $(document).ready(function(){
     
-var current_fs, next_fs, previous_fs; //fieldsets
-var opacity;
+// var current_fs, next_fs, previous_fs; //fieldsets
+// var opacity;
 
-$(".next").click(function(){
-
+// $(".next").click(function(){
+//     var remit_amount = document.getElementById("remit_amount").value;
+//     var npr = document.getElementById("npr").value;
+//     var target = document.getElementById("target").value;
+//     if(remit_amount == ""){
+//         swal("Oops", "Remit Amount value is invalid", "error");
+//         return false;
+//     }
+//     if(npr == ""){
+//         swal("Oops", "Receiver Amount value is invalid", "error");
+//         return false;
+//     }
     
-    current_fs = $(this).parent();
-    next_fs = $(this).parent().next();
     
-    //Add Class Active
-    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+//     current_fs = $(this).parent();
+//     console.log(current_fs)
+//     next_fs = $(this).parent().next();
     
-    //show the next fieldset
-    next_fs.show(); 
-    //hide the current fieldset with style
-    current_fs.animate({opacity: 0}, {
-        step: function(now) {
-            // for making fielset appear animation
-            opacity = 1 - now;
+//     //Add Class Active
+//     $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+    
+//     //show the next fieldset
+//     next_fs.show(); 
+//     //hide the current fieldset with style
+//     current_fs.animate({opacity: 0}, {
+//         step: function(now) {
+//             // for making fielset appear animation
+//             opacity = 1 - now;
 
-            current_fs.css({
-                'display': 'none',
-                'position': 'relative'
-            });
-            next_fs.css({'opacity': opacity});
-        }, 
-        duration: 600
-    });
-});
+//             current_fs.css({
+//                 'display': 'none',
+//                 'position': 'relative'
+//             });
+//             next_fs.css({'opacity': opacity});
+//         }, 
+//         duration: 600
+//     });
+// });
 
+// $(".previous").click(function(){
+    
+//     current_fs = $(this).parent();
+//     previous_fs = $(this).parent().prev();
+    
+//     //Remove class active
+//     $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+//     //show the previous fieldset
+//     previous_fs.show();
+
+//     //hide the current fieldset with style
+//     current_fs.animate({opacity: 0}, {
+//         step: function(now) {
+//             // for making fielset appear animation
+//             opacity = 1 - now;
+
+//             current_fs.css({
+//                 'display': 'none',
+//                 'position': 'relative'
+//             });
+//             previous_fs.css({'opacity': opacity});
+//         }, 
+//         duration: 600
+//     });
+// });
+
+// $('.radio-group .radio').click(function(){
+//     $(this).parent().find('.radio').removeClass('selected');
+//     $(this).addClass('selected');
+// });
+
+// $(".submit").click(function(){
+//     return false;
+// })
+    
+// });
+</script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
+<script>
+    $(document).ready(function(){
+
+$.validator.addMethod("usernameRegex", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z0-9]*$/i.test(value);
+}, "Username must contain only letters, numbers");
 $(".previous").click(function(){
-    
-    current_fs = $(this).parent();
-    previous_fs = $(this).parent().prev();
-    
-    //Remove class active
-    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-    
-    //show the previous fieldset
-    previous_fs.show();
-
-    //hide the current fieldset with style
-    current_fs.animate({opacity: 0}, {
-        step: function(now) {
-            // for making fielset appear animation
-            opacity = 1 - now;
-
-            current_fs.css({
-                'display': 'none',
-                'position': 'relative'
-            });
-            previous_fs.css({'opacity': opacity});
-        }, 
-        duration: 600
+     if ($('#personal_information').is(":visible")){
+        current_fs = $('#personal_information');
+            previous_fs = $('#company_information');
+            $("#progressbar li").eq($("fieldset").index(previous_fs)).addClass("active");
+        }else if($('#company_information').is(":visible")){
+            current_fs = $('#company_information');
+            previous_fs = $('#account_information');
+            $("#progressbar li").eq($("fieldset").index(previous_fs)).addClass("active");
+        }
+            previous_fs.show(); 
+            current_fs.hide(); 
+}),
+$(".next").click(function(){
+    var form = $("#transaction-form");
+    form.validate({
+        errorElement: 'span',
+        errorClass: 'help-block',
+        highlight: function(element, errorClass, validClass) {
+            $(element).closest('.form-group').addClass("has-error");
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).closest('.form-group').removeClass("has-error");
+        },
+        rules: {
+            remit_amount: {
+                required: true,
+            },
+            
+        },
+        messages: {
+            username: {
+                required: "Remit Amount field is required",
+            },
+        }
     });
+    if (form.valid() === true){
+        if ($('#account_information').is(":visible")){
+            current_fs = $('#account_information');
+            next_fs = $('#company_information');
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        }else if($('#company_information').is(":visible")){
+            current_fs = $('#company_information');
+            next_fs = $('#personal_information');
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        }
+        
+        next_fs.show(); 
+        current_fs.hide();
+    }
 });
 
-$('.radio-group .radio').click(function(){
-    $(this).parent().find('.radio').removeClass('selected');
-    $(this).addClass('selected');
 });
 
-$(".submit").click(function(){
-    return false;
-})
-    
-});
 </script>
 <script type="text/javascript">
     document
         .getElementById('target')
         .addEventListener('change', function() {
             'use strict';
+            
             var vis = document.querySelector('.vis'),
                 target = document.getElementById(this.value);
+            if(target.id == 'Bank-Deposit'){
+                document.getElementById("bank-amount").innerHTML = `Maximum sending limit for Bank Deposit is $ ${MAX_DEPOSIT_AMOUNT}`;
+                document.getElementById("remit-amount").innerHTML = "";
+                document.getElementById("esewa-amount").innerHTML = "";
+            }
+            if(target.id == 'Remit'){
+                document.getElementById("bank-amount").innerHTML = "";
+                document.getElementById("esewa-amount").innerHTML = "";
+                document.getElementById("remit-amount").innerHTML = `Maximum sending limit for Remit is $ ${MAX_REMIT_AMOUNT}`;
+            }
+            if(target.id == 'E-sewa'){
+                document.getElementById("remit-amount").innerHTML = "";
+                document.getElementById("bank-amount").innerHTML = "";
+                document.getElementById("esewa-amount").innerHTML = `Maximum sending limit for esewa is $ ${MAX_ESEWA_AMOUNT}`;
+            }
             if (vis !== null) {
                 vis.className = 'inv';
             }
@@ -926,6 +1110,9 @@ $(".submit").click(function(){
                 $("input[name='bank_name']").val('').attr('required', false);
                 $("input[name='bank_branch']").val('').attr('required', false);
                 $("input[name='account_number']").val('').attr('required', false);
+                $("input[name='receiver_contact_number']").val('').attr('required', true);
+                $("input[name='full_name']").val('').attr('required', true);
+                $("input[name='pick_up_district']").val('').attr('required', true);
 
             }
             if(value ==  "Bank-Deposit"){
@@ -934,6 +1121,8 @@ $(".submit").click(function(){
 
                 $("input[name='full_name']").val('').attr('required', false);
                 $("select[name='type']").attr('required', false);
+                // $("input[name='full_name']").val('').attr('required', true);
+                $("input[name='contact_number']").val('').attr('required', true);
 
                 $("input[name='receiver_contact_number']").val('').attr('required', false);
                 $("input[name='pick_up_district']").val('').attr('required', false);
@@ -990,7 +1179,11 @@ $(".submit").click(function(){
         $("#contact_number").inputmask({"mask": "9999999999"});
         $("#receiver_contact_number").inputmask({"mask": "9999999999"});
     });
-
+    $(document).ready(function(){
+        $('#transaction-form').submit(function(){
+        $('.submitButton').attr('disabled', 'disabled');
+    });
+    });
     $('.saveReceiver').click(function(e){
         e.preventDefault();
         remit_amount=$('.remit_amount').val();
@@ -1048,40 +1241,36 @@ $(".submit").click(function(){
 </script>
 
 <script type="text/javascript">
-    let data = document.getElementById('input-images-2')
-    console.log(data)
-    $(data).imageUploader({
-            imagesInputName: 'transfer_receipt',
-        });
     $(document).ready(function() {
-       
+        $('.input-images-2').imageUploader({
+            // imagesInputName: 'transfer_receipt',
+        });
 
-        // var imagesPreview = function(input, placeToInsertImagePreview) {
-            
-        //   console.log('hello',input.files);
-        //   console.log(placeToInsertImagePreview);
-        //     if (input.files) {
-        //         var filesAmount = input.files.length;
+        var imagesPreview = function(input, placeToInsertImagePreview) {
+          console.log(input.files);
+          console.log(placeToInsertImagePreview);
+            if (input.files) {
+                var filesAmount = input.files.length;
 
-        //         for (i = 0; i < filesAmount; i++) {
-        //             var reader = new FileReader();
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
 
-        //             reader.onload = function(event) {
-        //                 $(
-        //                 $.parseHTML(`
-        //                     <div class="image_cover" style="width : 150px; margin-right: 10px; margin-top: 10px" >
-        //                         <div class="cross-button">
-        //                             <div class="fa fa-times remove"></div>
-        //                         </div>
-        //                         <img src="${event.target.result}" class="remove__image img-fluid" />
-        //                     </div>`)
-        //                 ).appendTo(placeToInsertImagePreview).css({});
-        //             }
+                    reader.onload = function(event) {
+                        $(
+                        $.parseHTML(`
+                            <div class="image_cover" style="width : 150px; margin-right: 10px; margin-top: 10px" >
+                                <div class="cross-button">
+                                    <div class="fa fa-times remove"></div>
+                                </div>
+                                <img src="${event.target.result}" class="remove__image img-fluid" />
+                            </div>`)
+                        ).appendTo(placeToInsertImagePreview).css({});
+                    }
 
-        //             reader.readAsDataURL(input.files[i]);
-        //         }
-        //     }
-        // };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        };
 
         $('#fileUpload').on('change', function() {
             imagesPreview(this, 'div#image-holder');

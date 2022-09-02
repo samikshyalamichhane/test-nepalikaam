@@ -3,7 +3,6 @@
 @push('styles')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
-
     .bg-orange {
         background-color: #ff851b !important;
     }
@@ -39,26 +38,28 @@
 <section class="main__dashboard">
 
     <div class="container">
-    @if(!empty($dashboard_composer->notification))
-            <div id="notify" class="modal fade ">
-        		<div class="modal-dialog modal-lg">
-        			<div class="col-md-12">
-        				<div class="modal-content">
-        					<div class="modal-header">
-        						<h5 class="modal-title">Notice</h5>
-        						<button type="button" class="close" data-dismiss="modal">&times;</button>
-        					</div>
-        					<div class="modal-body">
+        @if(!empty($dashboard_composer->notification))
+        <div id="notify" class="modal fade ">
+            <div class="modal-dialog modal-lg">
+                <div class="col-md-12">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Notice</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
                             <br>
-                                {!!$dashboard_composer->notification!!}
-                                <br>
-                                <span>Please Confirm our</span>  <a href="{{ route('get.bank-detail') }}">Bank Details</a>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-            @endif
+                            {!!$dashboard_composer->notification!!}
+                            <br>
+                            <span>Please Confirm our</span> <a href="{{ route('get.bank-detail') }}">Bank Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+
 
         <div class="row">
 
@@ -125,434 +126,205 @@
 
                 <!--    </div>-->
                 <!--</div> -->
-                <section class="newsendmoney samecont">
-                    <div class="container">
-                        <div class="welcome">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="newexrate">
-                                    <h5 class="custom-h5-client">Welcome, {{Auth::user()->name}}</h5>
-                                    <h4>Today Exchange Rate</h4>
-                                    <button class="btn btn-danger d-block m-auto custom-btn-mid">1 AUD = NPR {{ $composer__rate->rate }}</button>
-                                    <p class="mt-2" style="margin:0;">  As of 
-                                        {{Carbon\Carbon::parse($composer__rate->updated_at)->format('D d, M Y ,H:i:s')}}
-                                        </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="newbtns">
-                                <a href="{{ route('makeTransaction') }}" class="btn btn-primary sndmoney">Send Money</a><br>
-                                <a href="{{ route('makeTransaction') }}" class="btn btn-primary trackremit">Track Your Remit</a>
+                <section class="boxes-lay">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="newlay">
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h5><a href="#">Today's Rate<br>{{ $composer__rate->rate }}</a></h5>
+                                        <!--<a href="{{route('makeTransaction')}}" class="btn btn-info">Make Transaction</a>-->
+                                    </div>
+                                    <div class="col-md-2 ca">
+                                        <a href="#">
+                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                        </a>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="newlay">
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h5> <a href="https://test.nepalikaam.com/client/view-profile/336"><br>{{ auth()->user()->name }}</a></h5>
+
+                                    </div>
+                                    <div class="col-md-2 ca">
+                                        <a href="https://test.nepalikaam.com/client/view-profile/336">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="newlay">
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h5> <a href="https://test.nepalikaam.com/client/all-transaction">Your<br>Transaction</a></h5>
+                                        <!--<a href="{{route('makeTransaction')}}" class="btn btn-info">Make Transaction</a>-->
+                                    </div>
+                                    <div class="col-md-2 ca">
+                                        <a href="https://test.nepalikaam.com/client/all-transaction">
+                                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </section>
-                <section class="transaction-table samecont">
-                    <div class="container">
-                        <h4>Your Transaction:-</h4>
-                       
-                  
-
-<div class="container">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="item">
-             <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">SN</th>
-      <th scope="col">Date</th>
-      <th scope="col">AUD</th>
-      <th scope="col">Receiver</th>
-       <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-</tbody>
-</table>
-          </div>
-        </div>
-        <div class="carousel-item">
-            <div class="item">
-              <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">SN</th>
-      <th scope="col">Date</th>
-      <th scope="col">AUD</th>
-      <th scope="col">Receiver</th>
-       <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-</tbody>
-</table>
-          </div>
-        </div>
-        
-        
-        
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous
-</span>
-      </a>
-    </div>
-</div>
-</div>
-</section>
-
-
-
-                <!--<div class="table-wrapper-second" style="background: #FFFFFF;">-->
-                <!--    <div>-->
-                <!--        <div class="row" style="margin-top: 40px; padding: 20px 40px;">-->
-                <!--            <h5 style="margin-bottom: 35px;">Dashboard</h5>-->
-                <!--            <div class="col-md-12 d-flex flex-wrap justify-content-center">-->
-                <!--                <a href="" class="custom-btn-db hover-custom-db text-center">-->
-                <!--                    <div>-->
-                <!--                        <div class="d-flex justify-content-center align-items-center client-dash-icon">-->
-                <!--                            <i class="fa fa-university client-fa"></i>-->
-                <!--                        </div>-->
-                <!--                        <p style="margin: 1.2rem 0; font-weight: 600; color: #000">Bank Details</p>-->
-                <!--                    </div>-->
-                <!--                </a>-->
-
-                <!--                <a href="" class="custom-btn-db hover-custom-db text-center">-->
-                <!--                    <div>-->
-                <!--                        <div class="d-flex justify-content-center align-items-center client-dash-icon">-->
-                <!--                            <i class="fa fa-signal client-fa"></i>-->
-                <!--                        </div>-->
-                <!--                        <p style="margin: 1.2rem 0; font-weight: 600; color: #000">Transaction</p>-->
-                <!--                    </div>-->
-                <!--                </a>-->
-
-                <!--                <a href="" class="custom-btn-db hover-custom-db text-center">-->
-                <!--                    <div>-->
-                <!--                        <div class="d-flex justify-content-center align-items-center client-dash-icon">-->
-                <!--                            <i class="fa fa-paper-plane client-fa"></i>-->
-                <!--                        </div>-->
-                <!--                        <p style="margin: 1.2rem 0; font-weight: 600; color: #000">Send Money</p>-->
-                <!--                    </div>-->
-                <!--                </a>-->
-
-                <!--                <a href="" class="custom-btn-db hover-custom-db text-center">-->
-                <!--                    <div>-->
-                <!--                        <div class="d-flex justify-content-center align-items-center client-dash-icon">-->
-                <!--                            <i class="fa fa-user client-fa"></i>-->
-                <!--                        </div>-->
-                <!--                        <p style="margin: 1.2rem 0; font-weight: 600; color: #000">Receivers</p>-->
-                <!--                    </div>-->
-                <!--                </a>-->
-
-                <!--                <a href="" class="custom-btn-db hover-custom-db text-center">-->
-                <!--                    <div>-->
-                <!--                        <div class="d-flex justify-content-center align-items-center client-dash-icon">-->
-                <!--                            <i class="fa fa-university client-fa"></i>-->
-                <!--                        </div>-->
-                <!--                        <p style="margin: 1.2rem 0; font-weight: 600; color: #000">About Us</p>-->
-                <!--                    </div>-->
-                <!--                </a>-->
-                <!--            </div>-->
-                <!--        </div>-->
-                <!--    </div>-->
-                <!--</div>-->
-
-                <!--<div>-->
-                <!--    <div class="transaction-box" >-->
-                <!--        <div class="row" style="margin-top: 40px; padding: 20px 40px;">-->
-                <!--            <div class="col-sm-12 col-md-6" style="background: #f3cf6c;">-->
-                <!--            <div class="py-4">-->
-                <!--                    <h2 class="client-dashboard-h2" style="color: red;">All Time Transaction</h2>-->
-                <!--                    <div class="d-flex justify-content-around" style="border-bottom: 2px solid red; font-weight: bold;">-->
-                <!--                        <h2 class="client-dashboard-h2 txt-bold">AUD</h2>-->
-                <!--                        <h2 class="client-dashboard-h2 txt-bold"> $ {{$transactions->sum('remit_amount')}}</h2>-->
-                <!--                    </div>-->
-                <!--                    <div class="d-flex justify-content-around">-->
-                <!--                        <h2 class="client-dashboard-h2">NPR</h2>-->
-                <!--                        <h2 class="client-dashboard-h2"> {{$transactions->sum('npr')}}</h2>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--            </div>-->
-                <!--            <div class="col-sm-12 col-md-6">-->
-                <!--                <div class="py-4">-->
-                <!--                    <h2 class="client-dashboard-h2" style="color: red;">This Month Transaction</h2>-->
-                <!--                    <div class="d-flex justify-content-around" style="border-bottom: 2px solid red; font-weight: bold;">-->
-                <!--                        <h2 class="client-dashboard-h2 txt-bold">AUD</h2>-->
-                <!--                        <h2 class="client-dashboard-h2 txt-bold"> ${{$CurrentMonthTransaction->sum('remit_amount')}}</h2>-->
-                <!--                    </div>-->
-                <!--                    <div class="d-flex justify-content-around">-->
-                <!--                        <h2 class="client-dashboard-h2">NPR</h2>-->
-                <!--                        <h2 class="client-dashboard-h2"> {{$CurrentMonthTransaction->sum('npr')}}</h2>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--            </div>-->
-                <!--        </div>-->
-                <!--    </div>-->
-                <!--</div>-->
-
-                <div class="total-wrapper">
-                    <div class="total-col bg-white">
-                        <p>Rate bargraph</p>
-                        <canvas id="myChart" width="400" height="400"></canvas>
-                        {{-- <span>{{$transactions->count()}}</span> --}}
-                    </div>
-                    {{-- <div class="total-col bg-blue">
+                <section class="newsendmoney samecont">
+                    <div class="">
+                        <div class="welcome">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="newexrate">
+                                        <h5 class="custom-h5-client">Welcome, {{Auth::user()->name}}</h5>
+                                        <h4>Today Exchange Rate</h4>
+                                        <button class="btn btn-danger d-block m-auto custom-btn-mid">1 AUD = NPR {{ $composer__rate->rate }}</button>
+                                        <p> As of
+                                            {{Carbon\Carbon::parse($composer__rate->updated_at)->format('D d, M Y')}}
+                                        </p>
+                                        <div class="newbtns">
+                                            <a href="{{ route('makeTransaction') }}" class="btn btn-primary sndmoney">Send Money</a>
+                                            <!--<a href="{{route('makeTransaction')}}" class="btn btn-info mt">Make Transaction</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="total-wrapper ng">
+                                        <div class="total-col bg-white newgraph">
+                                            <p>Rate bargraph</p>
+                                            <canvas id="myChart" width="400" height="300"></canvas>
+                                            {{-- <span>{{$transactions->count()}}</span> --}}
+                                        </div>
+                                        {{-- <div class="total-col bg-blue">
                         <p>Total Receivers</p>
                         <span>{{ auth()->user()->receivers()->count() }}</span>
-                    </div> --}}
-                </div>
-                
-                 <section class="transaction-table samecont">
-                    <div class="container">
-                        <h4>Receivers</h4>
-                       
-                  
+                                    </div> --}}
+                                </div>
 
-<div class="container">
-    <div id="carouselExampleIndicatorssd" class="carousel slide" data-ride="carousel">
-      
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="item">
-             <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">SN</th>
-      <th scope="col">Name</th>
-      <th scope="col">Last Transaction</th>
-      <th scope="col">AUD</th>
-       <th scope="col">NRS</th>
-        <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-</tbody>
-</table>
-          </div>
-        </div>
-        <div class="carousel-item">
-            <div class="item">
-             <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">SN</th>
-      <th scope="col">Name</th>
-      <th scope="col">Last Transaction</th>
-      <th scope="col">AUD</th>
-       <th scope="col">NRS</th>
-        <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>20-Jan-2020</td>
-      <td>500</td>
-      <td>Ramesh Sharma</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Prem Kumari Rai</td>
-      <td>22-Jan-2022</td>
-      <td>100</td>
-      <td>9500</td>
-      <td>Delivered</td>
-    </tr>
-</tbody>
-</table>
-          </div>
-        </div>
-        
-        
-        
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicatorssd" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+                            </div>
 
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicatorssd" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous
-</span>
-      </a>
+                        </div>
+                    </div>
+            </div>
+</section>
+
+<section class="transaction-table samecont">
+
+    <div class="row">
+        <div class="col-md-9">
+            <h4>Recent Transaction:-</h4>
+        </div>
+        <div class="col-md-3 tranbtn pull-right text-right">
+            <a href="https://test.nepalikaam.com/client/all-transaction" class="btn btn-info">View More</a>
+        </div>
     </div>
-</div>
-</div>
+
+    <div class="">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="item">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SN</th>
+                                    <th scope="col">Sent Date</th>
+                                    <!-- <th scope="col">Delivered Date</th> -->
+                                    <th scope="col">Receiver Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">AUD</th>
+                                    <th scope="col">Rate</th>
+                                    <th scope="col">Npr</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($transactions as $key=>$transaction)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td scope="row">{{ Carbon\Carbon::parse($transaction->created_at)->format('j, M Y ') }}</td>
+                                    <!-- <td>{{$transaction->random_token}}</td> -->
+                                    <td>@if($transaction->type=='Bank Deposit')
+                                        {{$transaction->account_holder_name}}
+                                        @else
+                                        {{$transaction->full_name}}
+                                        @endif
+                                    </td>
+                                    <td>{{$transaction->type}}</td>
+                                    <td>@if($transaction->status==0)
+                                        Pending
+                                        @elseif($transaction->status==1)
+                                        Inprogress
+                                        @else
+                                        Delivered
+                                        @endif
+
+
+
+                                    </td>
+                                    <td>{{$transaction->remit_amount}}</td>
+                                    <td>{{$transaction->rate}}</td>
+                                    <td>{{$transaction->npr}}</td>
+                                </tr>
+
+                                @endforeach
+                                <tr>
+                                    {{$transactions->links()}}
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </span>
+            </a>
+        </div>
+    </div>
 </section>
 <footer>
-    <div class="container">
+    <div class="">
         <div class="row">
             <div class="col-md-6 footerlocation">
-              <ul>
-                  <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Sundhara,Kathmandu</a></li>
-                  <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>01498766/788776</a></li>
-                  <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Sundhara,Kathmandu</a></li>
-              </ul>  
+                <ul>
+                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Sundhara,Kathmandu</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>01498766/788776</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Sundhara,Kathmandu</a></li>
+                </ul>
             </div>
             <div class="col-md-5 footerlocation footersocail pull-right text-right">
                 <h4>Follow us</h4>
-              <ul>
-                  <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                  <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                  <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              </ul>
-              <p>Developed By:<a href="#">Web House</a></p>
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <!--<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+                </ul>
+                <p>Developed By:<a href="#">Web House</a></p>
             </div>
         </div>
     </div>
 </footer>
-            </div> <!-- col-lg-12 closing -->
+</div> <!-- col-lg-12 closing -->
 
-        </div> <!-- row closing -->
-    </div> <!-- Container Closing -->
-    <!-- </div> -->
+</div> <!-- row closing -->
+</div> <!-- Container Closing -->
+<!-- </div> -->
 </section>
 
 @endsection
@@ -564,77 +336,75 @@
 
 <script>
     var app = new Vue({
-            el: '#app2',
-            created() {
-                fetch('http://api.timezonedb.com/v2.1/get-time-zone?key=8J0U4WL66A7O&format=json&by=zone&zone=Australia/Sydney').then(res => res.json()).then(data => {
-                    this.sydneyTime = data;
-                    this.isLoading = false;
-                });
-                fetch('/all-rates').then(res => res.json()).then(data =>
-                    {
-                        this.chartData = {
-                            type: 'line',
-                            data: {
-                                labels: data.data.map( (label, i) => this.getMomentDate(label.updated_at)),
-                                datasets: [{
-                                    label: 'Exchange Rate',
-                                    data: data.data.map( (label, i) => label.rate ),
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.4)',
-                                        'rgba(54, 162, 235, 0.4)',
-                                        'rgba(255, 206, 86, 0.4)',
-                                        'rgba(75, 192, 192, 0.4)',
-                                        'rgba(153, 102, 255, 0.4)',
-                                        'rgba(255, 159, 64, 0.4)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                    ],
-                                    borderWidth: 1,
-                                    barThickness: 30
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        display: true,
-                                        ticks: {
-                                            // beginAtZero: true,
-                                            suggestedMin: 60, //min
-                                            suggestedMax: 100 //max
-                                        }
-                                    }],
-                                },
-                            }
-                        }
-                        this.chartData && this.createChart('#myChart', this.chartData)
+        el: '#app2',
+        created() {
+            fetch('http://api.timezonedb.com/v2.1/get-time-zone?key=8J0U4WL66A7O&format=json&by=zone&zone=Australia/Sydney').then(res => res.json()).then(data => {
+                this.sydneyTime = data;
+                this.isLoading = false;
+            });
+            fetch('/all-rates').then(res => res.json()).then(data => {
+                this.chartData = {
+                    type: 'line',
+                    data: {
+                        labels: data.data.map((label, i) => this.getMomentDate(label.updated_at)),
+                        datasets: [{
+                            label: 'Exchange Rate',
+                            data: data.data.map((label, i) => label.rate),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.4)',
+                                'rgba(54, 162, 235, 0.4)',
+                                'rgba(255, 206, 86, 0.4)',
+                                'rgba(75, 192, 192, 0.4)',
+                                'rgba(153, 102, 255, 0.4)',
+                                'rgba(255, 159, 64, 0.4)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                            ],
+                            borderWidth: 1,
+                            barThickness: 35
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                display: true,
+                                ticks: {
+                                    // beginAtZero: true,
+                                    suggestedMin: 70, //min
+                                    suggestedMax: 95 //max
+                                }
+                            }],
+                        },
                     }
-                );
-            },
-            data(){
-                return {
-                    sydneyTime: {},
-                    isLoading: true,
-                    chartData: {}
                 }
-            },
-            methods:{
-                getMomentDate(date) {
-                    return moment(date).format('MMMM Do');
-                },
-                createChart(chartId,chartApp) {
-                    const ctx = document.querySelector(chartId);
-                    console.log(chartApp);
-                    const myChart = new Chart(ctx, {
-                        type: chartApp && chartApp.type,
-                        data: chartApp && chartApp.data,
-                        options: chartApp && chartApp.options,
-                    });
-                }
+                this.chartData && this.createChart('#myChart', this.chartData)
+            });
+        },
+        data() {
+            return {
+                sydneyTime: {},
+                isLoading: true,
+                chartData: {}
             }
-        });
+        },
+        methods: {
+            getMomentDate(date) {
+                return moment(date).format('MMMM Do');
+            },
+            createChart(chartId, chartApp) {
+                const ctx = document.querySelector(chartId);
+                // console.log(chartApp);
+                const myChart = new Chart(ctx, {
+                    type: chartApp && chartApp.type,
+                    data: chartApp && chartApp.data,
+                    options: chartApp && chartApp.options,
+                });
+            }
+        }
+    });
 </script>
- <script>
+<script>
     $('.tableslider').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -670,7 +440,7 @@
 
         ]
     });
-    </script>
+</script>
 @endpush
 
 {{-- <section class="user__dashboard">
@@ -690,7 +460,7 @@
                 <a href="{{route('makeTransaction')}}" class="btn btn-info">Make Transaction</a>
             </li>
             <li class="log_me_out">
-                <h3>{{Auth::user()->name}} <i class="fa logout__icon fa-chevron-down"></i></h3>
+                <h3>{{auth()->user()->name}} <i class="fa logout__icon fa-chevron-down"></i></h3>
                 <div class="options" style="display:none">
                     <ul>
                         <li>
