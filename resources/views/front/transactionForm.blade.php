@@ -212,397 +212,318 @@
 
 
 <div id="app">
-<section class="newprocess">
-<div id="grad1">
-    <div class="row justify-content-center mt-0">
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
-            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-               
-                <div class="row">
-                    <div class="col-md-12 mx-0">
-                    <div class="display__message"></div>
-                    @if (count($errors) > 0)
-                    <div class="alert alert-danger message">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    <div id="validation-errors" class="display__message">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> </div>
-                    
-                         <form id="transaction-form" action="{{route('saveTransaction')}}" method="post" enctype="multipart/form-data" >
-                            @csrf
-                            <!-- progressbar -->
-                            <ul id="progressbar">
-                                <li class="active" id="account">Receiver</li>
-                                <li id="personal">Account</li>
-                                <li id="payment">Paid Slip</li>
-                                <!-- <li id="confirm">Payment</li> -->
+    <section class="newprocess">
+    <div id="grad1">
+        <div class="row justify-content-center mt-0">
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                
+                    <div class="row">
+                        <div class="col-md-12 mx-0">
+                        <div class="display__message"></div>
+                        @if (count($errors) > 0)
+                        <div class="alert alert-danger message">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                                @endforeach
                             </ul>
-                            <!-- fieldsets -->
-                            <fieldset id="account_information" class="acc">
-                            <div class="form-card receiver commonp">
-                                    <p>Receiver Detail:</p>
-                                    <!--<div class="row mb-4" v-if="getPerson.length > 0">-->
-                                    <!--    <div class="col-md-3">-->
-                                    <!--        <label>Old Receivers:</label>-->
-                                    <!--    </div>-->
-                                    <!--    <div class="col-md-9">-->
-                                    <!--    <select @change="findAccountHolder($event)" v-model="saved_person"-->
-                                    <!--                class="form-control">-->
-                                    <!--                <option disabled selected>Please select name</option>-->
-                                    <!--                <option v-for="(number) in getPerson" :value="number">-->
-                                    <!--                    @{{number}}-->
-                                    <!--                </option>-->
-                                    <!--            </select>-->
-                                    <!--    </div>-->
-                                    <!--    </div>-->
-                                        <div class="row">
-                                        <div class="col-md-3 pt">
-                                            <label>Payment Type:</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                              <div class="selectoption">
-       
-        <select id="target" @change="onChange($event)" v-model="type" name="type"
-                                                class="form-control type" required="">
-            <option value="">Select..</option>
-            <option value="Bank-Deposit">Bank Deposit</option>
-                                                <option value="Remit">Remit</option>
-                                                <option value="E-sewa">E-sewa</option>
-
-            <select>
-                
-                 <div id="bank-amount" style="color:red"></div>
-                <div id="remit-amount" style="color:red"></div>
-                <div id="esewa-amount" style="color:red"></div>
-                
-                <div class="row mb-4 old-rec" v-if="getPerson.length > 0">
-                                        <div class="olr">
-                                            <label>Old Receivers:</label>
-                                        </div>
-                                        <div class="olf">
-                                        <select @change="findAccountHolder($event)" v-model="saved_person"
-                                                    class="form-control">
-                                                    <option disabled selected>Please select name</option>
-                                                    <option v-for="(number) in getPerson" :value="number">
-                                                        @{{number}}
-                                                    </option>
-                                                </select>
-                                        </div>
-                                        </div>
-                <!--<div class="row mb-4 old-rec" v-if="getPerson.length > 0">-->
-                <!--                        <div class="col-md-3">-->
-                <!--                            <label>Old Receivers:</label>-->
-                <!--                        </div>-->
-                <!--                        <div class="col-md-9">-->
-                <!--                        <select @change="findAccountHolder($event)" v-model="saved_person"-->
-                <!--                                    class="form-control">-->
-                <!--                                    <option disabled selected>Please select name</option>-->
-                <!--                                    <option v-for="(number) in getPerson" :value="number">-->
-                <!--                                        @{{number}}-->
-                <!--                                    </option>-->
-                <!--                                </select>-->
-                <!--                        </div>-->
-                <!--                        </div>-->
-                <div id="Bank-Deposit" class="inv">
-                    <div class="login-form">
-                        <div class="newform">
-                            <h5>New Receiver:-<a @click="clearSelection"
-                                                    class="text-light mt-2 btn btn-sm btn-success">Clear
-                                                    Selection</a></h5>
-                            <div class="form-group row">
-                                    <label for="full_name" class="col-md-3 col-form-label">Contact Number:</label>
-                                    <div class="col-md-9">
-                                        <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
-                                        <input name="contact_number" class="form-control contact_number"  id="full_name"
-                                                    type="number" :value="account_holder && account_holder.contact_number"
-                                                    :readonly="getDisabled" 
-                                                    onKeyPress="if(this.value.length==10) return false">
-                                                    @error('contact_number')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                 <!-- <div class="form-group row">
-                                    <label for="email_address" class="col-md-3 col-form-label">Full Name:</label>
-                                    <div class="col-md-9">
-                                        <input :value="account_holder && account_holder.full_name" type="text"
-                                                    :readonly="getDisabled" name="full_name" class="form-control full_name"
-                                                    required />
-                                                    @error('full_name')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div> -->
-                                <div class="form-group row">
-                                    <label for="user_name" class="col-md-3 col-form-label">Acc Holder Name:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="account_holder_name"
-                                                    :value="account_holder && account_holder.account_holder_name"
-                                                    class="form-control account_holder_name" :readonly="getDisabled"
-                                                    required />
-                                                    @error('account_holder_name')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="phone_number" class="col-md-3 col-form-label">Bank Name:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="bank_name"
-                                                    :value="account_holder && account_holder.bank_name"
-                                                    class="form-control bank_name" :readonly="getDisabled" required="" />
-                                                    @error('bank_name')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="present_address" class="col-md-3 col-form-label">Bank Branch:</label>
-                                    <div class="col-md-9">
-                                        <input :value="account_holder && account_holder.bank_branch" type="text"
-                                                    name="bank_branch" :readonly="getDisabled"
-                                                    class="form-control bank_branch" required />
-                                                    @error('bank_branch')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-3 col-form-label">Account Number:</label>
-                                    <div class="col-md-9">
-                                        <input :value="account_holder && account_holder.account_number" type="text"
-                                                    name="account_number" :readonly="getDisabled"
-                                                    class="form-control account_number" required />
-                                                    @error('account_number')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
                         </div>
-                </div>
-                </div>
-                </select>
-                <!-- <div class="row mb-4" v-if="getPerson.length > 0">
-                                        <div class="col-md-3">
-                                            <label>Old Receivers:</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                        <select @change="findAccountHolder($event)" v-model="saved_person"
-                                                    class="form-control">
-                                                    <option disabled selected>Please select name</option>
-                                                    <option v-for="(number) in getPerson" :value="number">
-                                                        @{{number}}
-                                                    </option>
-                                                </select>
-                                        </div>
-                                        </div> -->
-                
-                <div id="E-sewa" class="inv"><div class="newform commonp">
-                   <!-- <p>Upload Payment slip or proof.</p>
-                   <h5>New Receiver:-</h5>
-                   <div class="row mb-4" v-if="getPerson.length > 0">
-                                        <div class="col-md-3">
-                                            <label>Old Receivers:</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                        <select @change="findAccountHolder($event)" v-model="saved_person"
-                                                    class="form-control">
-                                                    <option disabled selected>Please select name</option>
-                                                    <option v-for="(number) in getPerson" :value="number">
-                                                        @{{number}}
-                                                    </option>
-                                                </select>
-                                        </div>
-                                        </div> -->
-                         <h5>New Receiver:-<a @click="clearSelection"
-                                                    class="text-light mt-2 btn btn-sm btn-success">Reset
-                                                    </a></h5>
-                         <div class="form-group row">
-                                    <label for="full_name" class="col-md-3 col-form-label">Esewa Id(Number):</label>
-                                    <div class="col-md-9">
-                                        <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
-                                        <input type="number" name="esewa_number"
-                                                    class="form-control" required type="number"
-                                                    onKeyPress="if(this.value.length==10) return false">
-                                                    @error('esewa_number')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-3 col-form-label">Name:</label>
-                                    <div class="col-md-9">
-                                        <!-- <input type="text" id="email_address" class="form-control so" name="email-address" placeholder="Write Here"> -->
-                                        <input type="text" name="esewa_name"
-                                                    class="form-control" required type="text">
-                                                    @error('esewa_name')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                               
-                    </div></div>
-                <div id="Remit" class="inv">
-                    <div class="newform">
-                         <h5>New Receiver:-<a @click="clearSelection"
-                                                    class="text-light mt-2 btn btn-sm btn-success">Clear
-                                                    Selection</a></h5>
-                         <div class="form-group row">
-                                    <label for="full_name" class="col-md-3 col-form-label">Contact Number:</label>
-                                    <div class="col-md-9">
-                                        <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
-                                        <input type="number" name="receiver_contact_number"
-                                                    class="form-control receiver_contact_number" required type="number"
-                                                    :readonly="getDisabled"
-                                                    :value="account_holder && account_holder.receiver_contact_number"
-                                                    onKeyPress="if(this.value.length==10) return false">
-                                                    @error('receiver_contact_number')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-3 col-form-label">Full Name<br>(<small>As per citizen</small>):</label>
-                                    <div class="col-md-9">
-                                        <!-- <input type="text" id="email_address" class="form-control so" name="email-address" placeholder="Write Here"> -->
-                                        <input :value="account_holder && account_holder.full_name" type="text"
-                                                    :readonly="getDisabled" name="full_name" class="form-control full_name"
-                                                    required />
-                                                    @error('account_holder.full_name')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="user_name" class="col-md-3 col-form-label">Pick-up district:</label>
-                                    <div class="col-md-9">
-                                        <!-- <input type="text" id="user_name" class="form-control so" name="username" placeholder="Write Here"> -->
-                                        <input type="text" name="pick_up_district"
-                                                    class="form-control pick_up_district" :readonly="getDisabled"
-                                                    :value="account_holder && account_holder.pick_up_district" />
-                                                    @error('pick_up_district')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                    </div>
-                                </div>
-                                
-                                <!-- <div class="form-group row">
-                                    <label for="present_address" class="col-md-3 col-form-label">Bank Branch:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="present_address" class="form-control so" placeholder="Write Here">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-3 col-form-label">Account Number:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="permanent_address" class="form-control so" name="permanent-address" placeholder="Write Here">
-                                    </div>
-                                </div> -->
-                    </div>
-                </div><!--remit close-->
-                </select>
-   </div>
-        </div>
-                                        </div>
-                                </div>
-                                <input type="button" name="next" class="next action-button" value="Next"/>
-                            </fieldset>
-                                <fieldset id="company_information" class="rec">
-                                <div class="form-card">
-                                   <div class="">
-					<span>AUD</span>
-				  </div>
-                                    <input  class="test remit_amount" type="number" name="remit_amount"  step="any"
-                                                    onkeyup="checkRemitAmount()" placeholder="How much AUD you want to send?" id="remit_amount" required/>
+                        @endif
+                        <div id="validation-errors" class="display__message">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                          </div>
+                        
+                            <form id="transaction-form" action="{{route('saveTransaction')}}" method="post" enctype="multipart/form-data" >
+                                @csrf
+                                <!-- progressbar -->
+                                <ul id="progressbar">
+                                    <li class="active" id="account">Account</li>
+                                    <li id="personal">Receiver</li>
+                                    <li id="payment">Paid Slip</li>
+                                    <!-- <li id="confirm">Payment</li> -->
+                                </ul>
+                                <!-- fieldsets -->
+                                <fieldset id="account_information" class="acc">
+                                <div class="form-card receiver commonp">
+                                        <p>Receiver Detail:</p>
+                                            <div class="row">
+                                            <div class="col-md-3 pt">
+                                                <label>Payment Type:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="selectoption">
+                                                    <select id="target" @change="onChange($event)" v-model="type" name="type" class="form-control type" required="">
+                                                        <option value="">Select..</option>
+                                                        <option value="Bank-Deposit">Bank Deposit</option>
+                                                        <option value="Remit">Remit</option>
+                                                        <option value="E-sewa">E-sewa</option>
+                                                        <select>
+                                                            <div id="Bank-Deposit" class="inv">
+                                                            <div id="bank-amount" style="color:red"></div>
+                                                            </div>
+                                                            <div id="E-sewa" class="inv"> <div id="esewa-amount" style="color:red"></div></div>
+                                                            <div id="Remit" class="inv"> <div id="remit-amount" style="color:red"></div></div>
+                                                            </select>
+                                                    </select>
+                                               </div>
+                                            </div>
+                                            <div class="form-card">
+                                                    <div class="">
+                                                        <span>AUD</span>
+                                                    </div>
+                                                    <input class="test remit_amount" type="number" name="remit_amount" step="any" onkeyup="checkRemitAmount()" placeholder="How much AUD you want to send?" id="remit_amount" required />
                                                     @error('remit_amount')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
-                                    <p>Service Charge:${{ $dashboard_composer->service_charge }}</p>
-                                    <div class="">
-					<span>So total paying out </span>
-				  </div>
-                                    <!-- <input type="text" name="uname" placeholder="$110"/> -->
-                                    <input type="number" class="form-control sending_amount pull-right" readonly required />
-                                    
-                                    <p id="rate-for-today">Today's rate:Rs.{{ $composer__rate->rate }}</p>
-                                     <div class="">
-					<span>Receiver will receive</span>
-				  </div>
-                                    <input type="text" id="npr" class="npr" name="npr" readonly required/>
-                                    @error('npr')
+                                                    <p>Service Charge:${{ $dashboard_composer->service_charge }}</p>
+                                                    <div class="">
+                                                        <span>So total paying out </span>
+                                                    </div>
+                                                    <!-- <input type="text" name="uname" placeholder="$110"/> -->
+                                                    <input type="number" class="form-control sending_amount pull-right" readonly required />
+
+                                                    <p id="rate-for-today">Today's rate:Rs.{{ $composer__rate->rate }}</p>
+                                                    <div class="">
+                                                        <span>Receiver will receive</span>
+                                                    </div>
+                                                    <input type="text" id="npr" class="npr" name="npr" readonly required />
+                                                    @error('npr')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
-                                    
+                                                </div>
+                                        </div>
                                 </div>
-                                <!-- <input type="button" name="next" class="next action-button" value="Next"/> -->
+                                    <input type="button" name="next" class="next action-button" value="Next"/>
+                                </fieldset>
+                                    <fieldset id="company_information" class="rec">
+                                    <div class="receiver commonp">
+                                    <!-------------old receiver---------->
+                                    <div class="row mb-4 old-rec" v-if="getPerson.length > 0">
+                                            <div class="olr">
+                                                <label>Old Receivers:</label>
+                                            </div>
+                                            <div class="olf">
+                                            <select @change="findAccountHolder($event)" v-model="saved_person"
+                                                        class="form-control">
+                                                        <option disabled selected>Please select name</option>
+                                                        <option v-for="(number) in getPerson" :value="number">
+                                                            @{{number}}
+                                                        </option>
+                                                    </select>
+                                            </div>
+                                            </div>
+                                    <!-----------Bank------------------->
+                                    <div v-if="type == 'Bank-Deposit'" id="Bank-Deposit">
+                                            <div class="login-form">
+                                                <div class="newform">
+                                                    <h5>New Receiver:-<a @click="clearSelection"
+                                                                            class="text-light mt-2 btn btn-sm btn-success">Clear
+                                                                            Selection</a></h5>
+                                                    <div class="form-group row">
+                                                            <label for="full_name" class="col-md-3 col-form-label">Contact Number:</label>
+                                                            <div class="col-md-9">
+                                                                <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
+                                                                <input name="contact_number" class="form-control contact_number"  id="full_name"
+                                                                            type="number" :value="account_holder && account_holder.contact_number"
+                                                                            :readonly="getDisabled" 
+                                                                            onKeyPress="if(this.value.length==10) return false">
+                                                                            @error('contact_number')
+                                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="user_name" class="col-md-3 col-form-label">Acc Holder Name:</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" name="account_holder_name"
+                                                                            :value="account_holder && account_holder.account_holder_name"
+                                                                            class="form-control account_holder_name" :readonly="getDisabled"
+                                                                            required />
+                                                                            @error('account_holder_name')
+                                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="phone_number" class="col-md-3 col-form-label">Bank Name:</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" name="bank_name"
+                                                                            :value="account_holder && account_holder.bank_name"
+                                                                            class="form-control bank_name" :readonly="getDisabled" required="" />
+                                                                            @error('bank_name')
+                                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="present_address" class="col-md-3 col-form-label">Bank Branch:</label>
+                                                            <div class="col-md-9">
+                                                                <input :value="account_holder && account_holder.bank_branch" type="text"
+                                                                            name="bank_branch" :readonly="getDisabled"
+                                                                            class="form-control bank_branch" required />
+                                                                            @error('bank_branch')
+                                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="permanent_address" class="col-md-3 col-form-label">Account Number:</label>
+                                                            <div class="col-md-9">
+                                                                <input :value="account_holder && account_holder.account_number" type="text"
+                                                                            name="account_number" :readonly="getDisabled"
+                                                                            class="form-control account_number" required />
+                                                                            @error('account_number')
+                                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        </div>
+                                    <!----------------Remitance -------------->
+                                    <div id="Remit" v-if="type == 'Remit'">
+                        <div class="newform">
+                            <h5>New Receiver:-<a @click="clearSelection"
+                                                        class="text-light mt-2 btn btn-sm btn-success">Clear
+                                                        Selection</a></h5>
+                            <div class="form-group row">
+                                        <label for="full_name" class="col-md-3 col-form-label">Contact Number:</label>
+                                        <div class="col-md-9">
+                                            <!-- <input type="text" id="full_name" class="form-control so" name="full-name" placeholder="Write Here"> -->
+                                            <input type="number" name="receiver_contact_number"
+                                                        class="form-control receiver_contact_number" required type="number"
+                                                        :readonly="getDisabled"
+                                                        :value="account_holder && account_holder.receiver_contact_number"
+                                                        onKeyPress="if(this.value.length==10) return false">
+                                                        @error('receiver_contact_number')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email_address" class="col-md-3 col-form-label">Full Name<br>(<small>As per citizen</small>):</label>
+                                        <div class="col-md-9">
+                                            <!-- <input type="text" id="email_address" class="form-control so" name="email-address" placeholder="Write Here"> -->
+                                            <input :value="account_holder && account_holder.full_name" type="text"
+                                                        :readonly="getDisabled" name="full_name" class="form-control full_name"
+                                                        required />
+                                                        @error('account_holder.full_name')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="user_name" class="col-md-3 col-form-label">Pick-up district:</label>
+                                        <div class="col-md-9">
+                                            <!-- <input type="text" id="user_name" class="form-control so" name="username" placeholder="Write Here"> -->
+                                            <input type="text" name="pick_up_district"
+                                                        class="form-control pick_up_district" :readonly="getDisabled"
+                                                        :value="account_holder && account_holder.pick_up_district" />
+                                                        @error('pick_up_district')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                        </div>
+                                    </div>
+                                    
+                        </div>
+                    </div><!--remit close-->
+                                    <!-------------- E-sewa ------------>
+                                    <div v-if="type == 'E-sewa'" id="E-sewa" class="newform commonp">
+                                        <h5>New Receiver:-<a @click="clearSelection"
+                                                class="text-light mt-2 btn btn-sm btn-success">Reset
+                                                </a>
+                                            </h5>
+                                    <div class="form-group row">
+                                       <label for="full_name" class="col-md-3 col-form-label">Esewa Id(Number):</label>
+                                          <div class="col-md-9">
+                                           <input type="number" name="esewa_number"
+                                                class="form-control" required type="number"
+                                                onKeyPress="if(this.value.length==10) return false">
+                                                @error('esewa_number')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                        </div>
+                                       </div>
+                               <div class="form-group row">
+                                        <label for="email_address" class="col-md-3 col-form-label">Name:</label>
+                                        <div class="col-md-9">
+                                            <!-- <input type="text" id="email_address" class="form-control so" name="email-address" placeholder="Write Here"> -->
+                                            <input type="text" name="esewa_name"
+                                                        class="form-control" required type="text">
+                                                        @error('esewa_name')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                        </div>
+                                    </div>
+                                    
+                            </div>
+                                    </div>
+                                    <!-- <input type="button" name="next" class="next action-button" value="Next"/> -->
 
-                               
+                                
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                    <input type="button" name="next" class="next action-button" value="Next"/>
+                                <!-- </fieldset> -->
+                                <!-- <fieldset id="company_information" class="rec"> -->
+                                
+                                </fieldset>
+                                <fieldset id="personal_information" class="pa">
+                                    <div class="form-card newupload">
+                                        <p>Upload your payment receipt</p>
+                                        <div id="input-images-2" style="padding-top: .5rem;"></div>
+                                        
+                                    </div>
+                                <!--<div class="form-group uploadfiles">-->
+                                <!--            <input id="inputFile" class="file-upload form-control" type="file" accept="image/*" />-->
+                                            
+                                <!--        </div>-->
+                                <div class="drag-area">
+    
+        
+        <h6>Drag & Drop files here or click to browse</h6>
+        <input id="fileUpload" type="file" name="transfer_receipt[]"  multiple>
+    <!--<input id="fileUpload" type="file" name="transfer_receipt[]"  multiple>-->
+    <!--  <input type="file" hidden>-->
+    </div>
+                                
+                                <div class="col-12">
+                                                <div id="image-holder" class="d-lg-flex"></div>
+                                            </div>
+                                <!-- <div class="uploadfiles">
+                                    <label class="btn-btn-default">
+                                        <div class="fa fa-upload fa-2x "></div>
+                                        <input id="image-holder" class="file-upload" type="file" accept="image/*" />
+                                    </label>
+                                    </div> -->
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                                <input type="button" name="next" class="next action-button" value="Next"/>
-                            <!-- </fieldset> -->
-                            <!-- <fieldset id="company_information" class="rec"> -->
-                               
-                            </fieldset>
-                            <fieldset id="personal_information" class="pa">
-                                <div class="form-card newupload">
-                                    <p>Upload your payment receipt</p>
-                                    <div id="input-images-2" style="padding-top: .5rem;"></div>
-                                    
-                                </div>
-                               <!--<div class="form-group uploadfiles">-->
-                               <!--            <input id="inputFile" class="file-upload form-control" type="file" accept="image/*" />-->
-                                          
-                               <!--        </div>-->
-                               <div class="drag-area">
-   
-      
-    <h6>Drag & Drop files here or click to browse</h6>
-    <input id="fileUpload" type="file" name="transfer_receipt[]"  multiple>
-  <!--<input id="fileUpload" type="file" name="transfer_receipt[]"  multiple>-->
-  <!--  <input type="file" hidden>-->
-  </div>
-                               
-                               <div class="col-12">
-                                            <div id="image-holder" class="d-lg-flex"></div>
+                                    <button type="submit" class="btn btn-success submitButton">Submit</button>
+                                    <!-- <input type="button" name="make_payment" class="next saveReceiver action-button " value="Submit"/> -->
+                                </fieldset>
+                                <!-- <fieldset>
+                                    <div class="form-card commonp">
+                                        <p>Success !</p>
+                                        <br><br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-3">
+                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
+                                            </div>
                                         </div>
-                              <!-- <div class="uploadfiles">
-                                <label class="btn-btn-default">
-                                    <div class="fa fa-upload fa-2x "></div>
-                                    <input id="image-holder" class="file-upload" type="file" accept="image/*" />
-                                </label>
-                                </div> -->
-                               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                                <button type="submit" class="btn btn-success submitButton">Submit</button>
-                                <!-- <input type="button" name="make_payment" class="next saveReceiver action-button " value="Submit"/> -->
-                            </fieldset>
-                            <!-- <fieldset>
-                                <div class="form-card commonp">
-                                    <p>Success !</p>
-                                    <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-3">
-                                            <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
+                                        <br><br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-7 text-center">
+                                            </div>
                                         </div>
                                     </div>
-                                    <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-7 text-center">
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset> -->
-                        </form>
+                                </fieldset> -->
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div></section>
+    </section>
    
 </div>
 
@@ -776,7 +697,7 @@ Swal.fire({
                 max: 10,
                 saved_person: '',
                 persons:[],
-                randomNumber: ''
+                randomNumber: '',
     		};
         },
         created() {
@@ -913,88 +834,7 @@ Swal.fire({
         readURL(this);
     });
 </script>
-<script type="text/javascript">
-//   $(document).ready(function(){
-    
-// var current_fs, next_fs, previous_fs; //fieldsets
-// var opacity;
 
-// $(".next").click(function(){
-//     var remit_amount = document.getElementById("remit_amount").value;
-//     var npr = document.getElementById("npr").value;
-//     var target = document.getElementById("target").value;
-//     if(remit_amount == ""){
-//         swal("Oops", "Remit Amount value is invalid", "error");
-//         return false;
-//     }
-//     if(npr == ""){
-//         swal("Oops", "Receiver Amount value is invalid", "error");
-//         return false;
-//     }
-    
-    
-//     current_fs = $(this).parent();
-//     console.log(current_fs)
-//     next_fs = $(this).parent().next();
-    
-//     //Add Class Active
-//     $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-    
-//     //show the next fieldset
-//     next_fs.show(); 
-//     //hide the current fieldset with style
-//     current_fs.animate({opacity: 0}, {
-//         step: function(now) {
-//             // for making fielset appear animation
-//             opacity = 1 - now;
-
-//             current_fs.css({
-//                 'display': 'none',
-//                 'position': 'relative'
-//             });
-//             next_fs.css({'opacity': opacity});
-//         }, 
-//         duration: 600
-//     });
-// });
-
-// $(".previous").click(function(){
-    
-//     current_fs = $(this).parent();
-//     previous_fs = $(this).parent().prev();
-    
-//     //Remove class active
-//     $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-//     //show the previous fieldset
-//     previous_fs.show();
-
-//     //hide the current fieldset with style
-//     current_fs.animate({opacity: 0}, {
-//         step: function(now) {
-//             // for making fielset appear animation
-//             opacity = 1 - now;
-
-//             current_fs.css({
-//                 'display': 'none',
-//                 'position': 'relative'
-//             });
-//             previous_fs.css({'opacity': opacity});
-//         }, 
-//         duration: 600
-//     });
-// });
-
-// $('.radio-group .radio').click(function(){
-//     $(this).parent().find('.radio').removeClass('selected');
-//     $(this).addClass('selected');
-// });
-
-// $(".submit").click(function(){
-//     return false;
-// })
-    
-// });
-</script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
 <script>
@@ -1066,6 +906,7 @@ $(".next").click(function(){
             
             var vis = document.querySelector('.vis'),
                 target = document.getElementById(this.value);
+                console.log('target',target.id);
             if(target.id == 'Bank-Deposit'){
                 document.getElementById("bank-amount").innerHTML = `Maximum sending limit for Bank Deposit is $ ${MAX_DEPOSIT_AMOUNT}`;
                 document.getElementById("remit-amount").innerHTML = "";
@@ -1291,22 +1132,3 @@ $(".next").click(function(){
 
 @endpush
 
-
-{{--
-                                    <div class="form-group">
-                                        <p class="text-danger notes">
-                                            Remit charge NPR 300 per 60,000 in Nepal.
-                                            <br>
-                                            Over 2 lac ABBS charge deducted from receiver amount per lakh NPR100
-                                        </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <p class="text-uppercase group__title">OUR BANK DETAILS:</p>
-                                        <p><span class="text-uppercase group__title">OUR BANK DETAILS:</span> <small>Global
-                                                10</small></p>
-                                        <p><span class="text-uppercase group__title">BSB:</span> <small>082057</small></p>
-                                        <p>
-                                            <span class="text-uppercase group__title">A/C:</span> <small>441157687</small>
-                                        </p>
-
-                                    </div> --}}
